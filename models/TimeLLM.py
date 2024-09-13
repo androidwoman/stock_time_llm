@@ -42,14 +42,14 @@ class Model(nn.Module):
 
         if configs.llm_model == 'LLAMA':
             # self.llama_config = LlamaConfig.from_pretrained('/mnt/alps/modelhub/pretrained_model/LLaMA/7B_hf/')
-            self.llama_config = LlamaConfig.from_pretrained('huggyllama/llama-7b')
+            self.llama_config = LlamaConfig.from_pretrained('huggyllama/llama-70b')
             self.llama_config.num_hidden_layers = configs.llm_layers
             self.llama_config.output_attentions = True
             self.llama_config.output_hidden_states = True
             try:
                 self.llm_model = LlamaModel.from_pretrained(
                     # "/mnt/alps/modelhub/pretrained_model/LLaMA/7B_hf/",
-                    'huggyllama/llama-7b',
+                    'huggyllama/llama-70b',
                     trust_remote_code=True,
                     local_files_only=True,
                     config=self.llama_config,
@@ -59,7 +59,7 @@ class Model(nn.Module):
                 print("Local model files not found. Attempting to download...")
                 self.llm_model = LlamaModel.from_pretrained(
                     # "/mnt/alps/modelhub/pretrained_model/LLaMA/7B_hf/",
-                    'huggyllama/llama-7b',
+                    'huggyllama/llama-70b',
                     trust_remote_code=True,
                     local_files_only=False,
                     config=self.llama_config,
@@ -68,7 +68,7 @@ class Model(nn.Module):
             try:
                 self.tokenizer = LlamaTokenizer.from_pretrained(
                     # "/mnt/alps/modelhub/pretrained_model/LLaMA/7B_hf/tokenizer.model",
-                    'huggyllama/llama-7b',
+                    'huggyllama/llama-70b',
                     trust_remote_code=True,
                     local_files_only=True
                 )
@@ -76,7 +76,7 @@ class Model(nn.Module):
                 print("Local tokenizer files not found. Atempting to download them..")
                 self.tokenizer = LlamaTokenizer.from_pretrained(
                     # "/mnt/alps/modelhub/pretrained_model/LLaMA/7B_hf/tokenizer.model",
-                    'huggyllama/llama-7b',
+                    'huggyllama/llama-70b',
                     trust_remote_code=True,
                     local_files_only=False
                 )
